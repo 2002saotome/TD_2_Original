@@ -47,6 +47,20 @@ class GameScene {
 	Audio* audio_ = nullptr;
 	DebugText* debugText_ = nullptr;
 
+	uint32_t textureHandle_[12];
+
+	Sprite* title_ = nullptr;
+	Sprite* GameScene_ = nullptr;
+	Sprite* GamePlay_ = nullptr;
+	Sprite* GameCrear_ = nullptr;
+	Sprite* GameOver_ = nullptr;
+
+	//シーン
+	int scene_ = 0;
+
+	//タイマー
+	int Timer = 250;
+
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
