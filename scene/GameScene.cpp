@@ -42,7 +42,9 @@ void GameScene::Update()
 		//タイトル
 	case 0:
 #pragma region TITLE
-		if (input_->TriggerKey(DIK_SPACE))
+		//初期化
+		Timer = 250;
+		if (input_->TriggerKey(DIK_RIGHT))
 		{
 			scene_ = 1;
 		}
@@ -51,7 +53,7 @@ void GameScene::Update()
 		//ゲーム説明
 	case 1:
 #pragma region GAMESCENE
-		if (input_->TriggerKey(DIK_SPACE))
+		if (input_->TriggerKey(DIK_RIGHT))
 		{
 			scene_ = 2;
 		}
@@ -59,9 +61,13 @@ void GameScene::Update()
 		//ゲームプレイ
 	case 2:
 #pragma region GAMEPLAY
-		if (input_->TriggerKey(DIK_SPACE))
+		if (scene_ == 2)
 		{
-			scene_ = 3;
+			Timer--;
+		}
+		if (Timer < 0)
+		{
+			scene_ = 4;
 		}
 
 		//ゲームクリア
@@ -69,7 +75,7 @@ void GameScene::Update()
 #pragma region GAMECREAR
 		if (input_->TriggerKey(DIK_SPACE))
 		{
-			scene_ = 4;
+			scene_ = 0;
 		}
 
 		//ゲームオーバー
@@ -77,9 +83,15 @@ void GameScene::Update()
 #pragma region GAMEOVER
 		if (input_->TriggerKey(DIK_SPACE))
 		{
-			scene_ = 1;
+			scene_ = 0;
 		}
 	}
+
+	DebugText::GetInstance()->SetPos(1000,0);
+	DebugText::GetInstance()->Printf("scene_:%d",scene_);
+
+	DebugText::GetInstance()->SetPos(1000, 30);
+	DebugText::GetInstance()->Printf("Timer:%d", Timer);
 
 }
 
